@@ -1,4 +1,4 @@
-msg: working
+msg: working yay
 spring:
   cloud:
     gateway:
