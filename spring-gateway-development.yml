@@ -20,3 +20,9 @@ spring:
             - RewritePath=/newreportmodule/(?<path>.*), /$\{path}
             #- AddRequestHeader=first-request, first-request-header
             #- AddResponseHeader=first-response, first-response-header
+        - id: gateway-kpi
+          uri: lb://gateway-kpi
+          predicates:
+            - Path=/proxy/**   
+          filters:
+            - RewritePath=/gateway-kpi/(?<path>.*), /$\{path}  
