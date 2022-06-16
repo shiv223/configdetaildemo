@@ -4,7 +4,7 @@ spring:
     gateway:
       routes:
         - id: kpi-uauth-api
-          uri: lb://kpi-reprots-api
+          uri: lb://kpi-uauth-api
           predicates:
             - Path=/auth/**        #In order to expose service under custom path 
           filters:
