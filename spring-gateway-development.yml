@@ -4,7 +4,7 @@ spring:
     gateway:
       routes:
         - id: firstapi
-          uri: lb://firstapi
+          uri: lb://alternative
           predicates:
             - Path=/firstapi/**        #In order to expose service under custom path 
           filters:
