@@ -6,14 +6,14 @@ spring:
         - id: kpi-uauth-api
           uri: lb://kpi-uauth-api
           predicates:
-            - Path=/auth/**        #In order to expose service under custom path 
+            - Path=/firstapi/**        #In order to expose service under custom path 
           filters:
-            - RewritePath=/auth/(?<path>.*), /$\{path} # Eg: For a request path of /auth/api/login, this sets the path to /api/login before making the downstream request
+            - RewritePath=/firstapi/(?<path>.*), /$\{path} # Eg: For a request path of /auth/api/login, this sets the path to /api/login before making the downstream request
             #- CustomFilter # if use the custom filter then we need to mention name of the custom filter class
             #- AddRequestHeader=first-request, first-request-header         ---> these acts as a pre filter, where you can get value in the controiller by doing this @RequestHeader("first-request") String firstRequest
             #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab
-        - id: kpi-reprots-api
-          uri: lb://kpi-uauth-api
+        - id: firstapi
+          uri: lb://firstapi
           predicates:
             - Path=/newreportmodule/**   
           filters:
