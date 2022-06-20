@@ -3,8 +3,8 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: kpi-uauth-api
-          uri: lb://kpi-uauth-api
+        - id: firstapi
+          uri: lb://firstapi
           predicates:
             - Path=/firstapi/**        #In order to expose service under custom path 
           filters:
@@ -12,14 +12,7 @@ spring:
             #- CustomFilter # if use the custom filter then we need to mention name of the custom filter class
             #- AddRequestHeader=first-request, first-request-header         ---> these acts as a pre filter, where you can get value in the controiller by doing this @RequestHeader("first-request") String firstRequest
             #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab
-        - id: firstapi
-          uri: lb://firstapi
-          predicates:
-            - Path=/newreportmodule/**   
-          filters:
-            - RewritePath=/newreportmodule/(?<path>.*), /$\{path}
-            #- AddRequestHeader=first-request, first-request-header
-            #- AddResponseHeader=first-response, first-response-header
+     
         - id: gateway-kpi
           uri: lb://gateway-kpi
           predicates:
