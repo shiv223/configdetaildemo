@@ -9,8 +9,8 @@ spring:
             - Path=/firstapi/**        #In order to expose service under custom path 
           filters:
             - RewritePath=/firstapi/(?<path>.*), /$\{path} # Eg: For a request path of /auth/api/login, this sets the path to /api/login before making the downstream request
-              name: RequestRateLimiter
-              args:
+            - name: RequestRateLimiter
+            - args:
                 redis-rate-limiter.replenishRate: 1
                 redis-rate-limiter.burstCapacity: 2
                 redis-rate-limiter.requestedTokens: 1
