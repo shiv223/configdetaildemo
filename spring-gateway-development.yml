@@ -1,7 +1,4 @@
 msg: working yay
-filter.request-rate-limiter.deny-empty-key=false
-filter.request-rate-limiter.empty-key-status-code=323
-
 spring:
   cloud:
     gateway:
