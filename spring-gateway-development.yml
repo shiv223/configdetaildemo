@@ -1,21 +1,21 @@
---- 
-msg: "working yay"
-spring: 
-  cloud: 
-    gateway: 
-      routes: 
-        - 
-          filters: 
-            - "RewritePath=/firstapi/(?<path>.*), /$\\{path}"
-
-          id: firstapi
-          predicates: 
-            - Path=/firstapi/**
-          uri: "lb://firstapi"
-        - 
-          filters: 
-            - "RewritePath=/gateway-kpi/(?<path>.*), /$\\{path}"
-          id: gateway-kpi
-          predicates: 
-            - Path=/proxy/**
-          uri: "lb://gateway-kpi"
+msg: working yay
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: firstapi
+          uri: lb://firstapi
+          predicates:
+            - Path=/firstapi/**        #In order to expose service under custom path 
+          filters:
+            - RewritePath=/firstapi/(?<path>.*), /$\{path} # Eg: For a request path of /auth/api/login, this sets the path to /api/login before making the downstream request
+            #- CustomFilter # if use the custom filter then we need to mention name of the custom filter class
+            #- AddRequestHeader=first-request, first-request-header         ---> these acts as a pre filter, where you can get value in the controiller by doing this @RequestHeader("first-request") String firstRequest
+            #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab
+     
+        - id: gateway-kpi
+          uri: lb://gateway-kpi
+          predicates:
+            - Path=/proxy/**   
+          filters:
+            - RewritePath=/gateway-kpi/(?<path>.*), /$\{path}  
