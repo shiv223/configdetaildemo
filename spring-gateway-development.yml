@@ -1,4 +1,7 @@
 msg: working yay
+spring.cloud.gateway.filter.request-rate-limiter.deny-empty-key=false
+spring.cloud.gateway.filter.request-rate-limiter.empty-key-status-code=323
+
 spring:
   cloud:
     gateway:
@@ -11,7 +14,12 @@ spring:
             - RewritePath=/firstapi/(?<path>.*), /$\{path} # Eg: For a request path of /auth/api/login, this sets the path to /api/login before making the downstream request
             #- CustomFilter # if use the custom filter then we need to mention name of the custom filter class
             #- AddRequestHeader=first-request, first-request-header         ---> these acts as a pre filter, where you can get value in the controiller by doing this @RequestHeader("first-request") String firstRequest
-            #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab    
+            #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab 
+          name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 2
+              redis-rate-limiter.burstCapacity: 2
+              redis-rate-limiter.requestedTokens: 1   
         - id: gateway-kpi
           uri: lb://gateway-kpi
           predicates:
