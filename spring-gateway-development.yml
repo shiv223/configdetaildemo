@@ -1,10 +1,14 @@
 msg: working yay
-spring.cloud.gateway.filter.request-rate-limiter.deny-empty-key=false
-spring.cloud.gateway.filter.request-rate-limiter.empty-key-status-code=323
+filter.request-rate-limiter.deny-empty-key=false
+filter.request-rate-limiter.empty-key-status-code=323
 
 spring:
   cloud:
     gateway:
+      filter:
+          request-rate-limiter:
+            deny-empty-key=false
+            empty-key-status-code:323
       routes:
         - id: firstapi
           uri: lb://firstapi
