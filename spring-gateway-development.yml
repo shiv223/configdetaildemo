@@ -4,8 +4,8 @@ spring:
     gateway:
       filter:
           request-rate-limiter:
-            deny-empty-key=false
-            empty-key-status-code:323
+            - deny-empty-key=false
+            - empty-key-status-code:323
       routes:
         - id: firstapi
           uri: lb://firstapi
