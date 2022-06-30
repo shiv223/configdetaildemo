@@ -27,3 +27,4 @@ spring:
             - Path=/proxy/**   
           filters:
             - RewritePath=/gateway-kpi/(?<path>.*), /$\{path}  
+            
