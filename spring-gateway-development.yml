@@ -12,6 +12,11 @@ spring:
             #- CustomFilter # if use the custom filter then we need to mention name of the custom filter class
             #- AddRequestHeader=first-request, first-request-header         ---> these acts as a pre filter, where you can get value in the controiller by doing this @RequestHeader("first-request") String firstRequest
             #- AddResponseHeader=first-response, first-response-header      ---> these acts as a post filter, where can see the value in the network tab
+            name: RequestRateLimiter
+            args:
+              redis-rate-limiter.replenishRate: 500
+              redis-rate-limiter.burstCapacity: 1000
+              redis-rate-limiter.requestedTokens: 1
      
         - id: gateway-kpi
           uri: lb://gateway-kpi
